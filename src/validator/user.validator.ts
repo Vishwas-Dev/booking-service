@@ -5,7 +5,7 @@ export const userSchema = z.object({
   email: z.string().email(),
   age: z.number().int(),
 });
-// TEST 
+// TEST ..
 // const result = userSchema.safeParse({
 //     name: "Vishal",
 //     email: "aakash@gmail.com",
