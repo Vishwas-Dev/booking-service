@@ -6,15 +6,19 @@
   "scripts": {
     "start": "tsx src/server.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon --exec tsx src/server.ts"
+    "dev": "nodemon --exec tsx src/server.ts",
+    "postinstall": "prisma skills sync || exit 0"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "module",
   "dependencies": {
+    "@prisma/client": "^7.10.0",
+    "anynum": "^1.0.1",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
+    "prisma": "^7.10.0",
     "uuid": "^14.0.2",
     "winston": "^3.19.0",
     "winston-daily-rotate-file": "^5.0.0",
