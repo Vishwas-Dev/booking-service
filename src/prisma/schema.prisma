@@ -18,7 +18,7 @@ model Booking {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   bookingAmmount Int
-  status     bookingStatus
+  status     bookingStatus @default(PENDING)
   totalGuests   Int
 }
 
