@@ -2,7 +2,7 @@ export interface AppError extends Error  {
     statusCode : number;
 }
 
-export class internalServerError implements AppError{
+export class InternalServerError implements AppError{
     statusCode: number;
     message: string;
     name : string;
@@ -10,10 +10,10 @@ export class internalServerError implements AppError{
     constructor(message: string){
         this.statusCode = 500;
         this.message = message;
-        this.name = "internalServerError"
+        this.name = "InternalServerError"
     }
 } 
-export class badRequestHandler implements AppError{
+export class BadRequestError implements AppError{
     statusCode: number;
     message: string;
     name : string;
@@ -21,6 +21,20 @@ export class badRequestHandler implements AppError{
     constructor(message: string){
         this.statusCode = 400;
         this.message = message;
-        this.name = "badRequestHandler"
+        this.name = "BadRequestError"
     }
 } 
+
+export class NotFoundError implements AppError{
+    statusCode: number;
+    message: string;
+    name : string;
+
+    constructor(message: string){
+        this.statusCode = 404;
+        this.message = message;
+        this.name = "NotFoundError"
+    }
+} 
+
+

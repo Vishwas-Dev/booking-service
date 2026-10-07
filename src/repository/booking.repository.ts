@@ -31,7 +31,7 @@ export async function getIdempotencyKey(key: string) {
 
     const idempotencyKey = await prisma.idempotencyKey.findUnique({
         where: {
-            key
+            key 
         }
     });
     return idempotencyKey;
