@@ -46,3 +46,8 @@ export { Prisma }
  * 
  */
 export type Booking = Prisma.BookingModel
+/**
+ * Model idempotencyKey
+ * 
+ */
+export type idempotencyKey = Prisma.idempotencyKeyModel

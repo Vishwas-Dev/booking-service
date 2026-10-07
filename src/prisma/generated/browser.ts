@@ -22,3 +22,8 @@ export * from './enums.js';
  * 
  */
 export type Booking = Prisma.BookingModel
+/**
+ * Model idempotencyKey
+ * 
+ */
+export type idempotencyKey = Prisma.idempotencyKeyModel

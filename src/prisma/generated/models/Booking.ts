@@ -256,6 +256,7 @@ export type BookingWhereInput = {
   bookingAmmount?: Prisma.IntFilter<"Booking"> | number
   status?: Prisma.EnumbookingStatusFilter<"Booking"> | $Enums.bookingStatus
   totalGuests?: Prisma.IntFilter<"Booking"> | number
+  idempotencyKey?: Prisma.XOR<Prisma.IdempotencyKeyNullableScalarRelationFilter, Prisma.idempotencyKeyWhereInput> | null
 }
 
 export type BookingOrderByWithRelationInput = {
@@ -267,6 +268,7 @@ export type BookingOrderByWithRelationInput = {
   bookingAmmount?: Prisma.SortOrder
   status?: Prisma.SortOrder
   totalGuests?: Prisma.SortOrder
+  idempotencyKey?: Prisma.idempotencyKeyOrderByWithRelationInput
 }
 
 export type BookingWhereUniqueInput = Prisma.AtLeast<{
@@ -281,6 +283,7 @@ export type BookingWhereUniqueInput = Prisma.AtLeast<{
   bookingAmmount?: Prisma.IntFilter<"Booking"> | number
   status?: Prisma.EnumbookingStatusFilter<"Booking"> | $Enums.bookingStatus
   totalGuests?: Prisma.IntFilter<"Booking"> | number
+  idempotencyKey?: Prisma.XOR<Prisma.IdempotencyKeyNullableScalarRelationFilter, Prisma.idempotencyKeyWhereInput> | null
 }, "id">
 
 export type BookingOrderByWithAggregationInput = {
@@ -319,8 +322,9 @@ export type BookingCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   bookingAmmount: number
-  status: $Enums.bookingStatus
+  status?: $Enums.bookingStatus
   totalGuests: number
+  idempotencyKey?: Prisma.idempotencyKeyCreateNestedOneWithoutBookingInput
 }
 
 export type BookingUncheckedCreateInput = {
@@ -330,8 +334,9 @@ export type BookingUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   bookingAmmount: number
-  status: $Enums.bookingStatus
+  status?: $Enums.bookingStatus
   totalGuests: number
+  idempotencyKey?: Prisma.idempotencyKeyUncheckedCreateNestedOneWithoutBookingInput
 }
 
 export type BookingUpdateInput = {
@@ -342,6 +347,7 @@ export type BookingUpdateInput = {
   bookingAmmount?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumbookingStatusFieldUpdateOperationsInput | $Enums.bookingStatus
   totalGuests?: Prisma.IntFieldUpdateOperationsInput | number
+  idempotencyKey?: Prisma.idempotencyKeyUpdateOneWithoutBookingNestedInput
 }
 
 export type BookingUncheckedUpdateInput = {
@@ -353,6 +359,7 @@ export type BookingUncheckedUpdateInput = {
   bookingAmmount?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumbookingStatusFieldUpdateOperationsInput | $Enums.bookingStatus
   totalGuests?: Prisma.IntFieldUpdateOperationsInput | number
+  idempotencyKey?: Prisma.idempotencyKeyUncheckedUpdateOneWithoutBookingNestedInput
 }
 
 export type BookingCreateManyInput = {
@@ -362,7 +369,7 @@ export type BookingCreateManyInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   bookingAmmount: number
-  status: $Enums.bookingStatus
+  status?: $Enums.bookingStatus
   totalGuests: number
 }
 
@@ -436,6 +443,11 @@ export type BookingSumOrderByAggregateInput = {
   totalGuests?: Prisma.SortOrder
 }
 
+export type BookingNullableScalarRelationFilter = {
+  is?: Prisma.BookingWhereInput | null
+  isNot?: Prisma.BookingWhereInput | null
+}
+
 export type IntFieldUpdateOperationsInput = {
   set?: number
   increment?: number
@@ -452,6 +464,80 @@ export type EnumbookingStatusFieldUpdateOperationsInput = {
   set?: $Enums.bookingStatus
 }
 
+export type BookingCreateNestedOneWithoutIdempotencyKeyInput = {
+  create?: Prisma.XOR<Prisma.BookingCreateWithoutIdempotencyKeyInput, Prisma.BookingUncheckedCreateWithoutIdempotencyKeyInput>
+  connectOrCreate?: Prisma.BookingCreateOrConnectWithoutIdempotencyKeyInput
+  connect?: Prisma.BookingWhereUniqueInput
+}
+
+export type BookingUpdateOneWithoutIdempotencyKeyNestedInput = {
+  create?: Prisma.XOR<Prisma.BookingCreateWithoutIdempotencyKeyInput, Prisma.BookingUncheckedCreateWithoutIdempotencyKeyInput>
+  connectOrCreate?: Prisma.BookingCreateOrConnectWithoutIdempotencyKeyInput
+  upsert?: Prisma.BookingUpsertWithoutIdempotencyKeyInput
+  disconnect?: Prisma.BookingWhereInput | boolean
+  delete?: Prisma.BookingWhereInput | boolean
+  connect?: Prisma.BookingWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BookingUpdateToOneWithWhereWithoutIdempotencyKeyInput, Prisma.BookingUpdateWithoutIdempotencyKeyInput>, Prisma.BookingUncheckedUpdateWithoutIdempotencyKeyInput>
+}
+
+export type BookingCreateWithoutIdempotencyKeyInput = {
+  userId: number
+  hotelId: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  bookingAmmount: number
+  status?: $Enums.bookingStatus
+  totalGuests: number
+}
+
+export type BookingUncheckedCreateWithoutIdempotencyKeyInput = {
+  id?: number
+  userId: number
+  hotelId: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  bookingAmmount: number
+  status?: $Enums.bookingStatus
+  totalGuests: number
+}
+
+export type BookingCreateOrConnectWithoutIdempotencyKeyInput = {
+  where: Prisma.BookingWhereUniqueInput
+  create: Prisma.XOR<Prisma.BookingCreateWithoutIdempotencyKeyInput, Prisma.BookingUncheckedCreateWithoutIdempotencyKeyInput>
+}
+
+export type BookingUpsertWithoutIdempotencyKeyInput = {
+  update: Prisma.XOR<Prisma.BookingUpdateWithoutIdempotencyKeyInput, Prisma.BookingUncheckedUpdateWithoutIdempotencyKeyInput>
+  create: Prisma.XOR<Prisma.BookingCreateWithoutIdempotencyKeyInput, Prisma.BookingUncheckedCreateWithoutIdempotencyKeyInput>
+  where?: Prisma.BookingWhereInput
+}
+
+export type BookingUpdateToOneWithWhereWithoutIdempotencyKeyInput = {
+  where?: Prisma.BookingWhereInput
+  data: Prisma.XOR<Prisma.BookingUpdateWithoutIdempotencyKeyInput, Prisma.BookingUncheckedUpdateWithoutIdempotencyKeyInput>
+}
+
+export type BookingUpdateWithoutIdempotencyKeyInput = {
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  hotelId?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bookingAmmount?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumbookingStatusFieldUpdateOperationsInput | $Enums.bookingStatus
+  totalGuests?: Prisma.IntFieldUpdateOperationsInput | number
+}
+
+export type BookingUncheckedUpdateWithoutIdempotencyKeyInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  hotelId?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bookingAmmount?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumbookingStatusFieldUpdateOperationsInput | $Enums.bookingStatus
+  totalGuests?: Prisma.IntFieldUpdateOperationsInput | number
+}
+
 
 
 export type BookingSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -463,6 +549,7 @@ export type BookingSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   bookingAmmount?: boolean
   status?: boolean
   totalGuests?: boolean
+  idempotencyKey?: boolean | Prisma.Booking$idempotencyKeyArgs<ExtArgs>
 }, ExtArgs["result"]["booking"]>
 
 
@@ -479,10 +566,15 @@ export type BookingSelectScalar = {
 }
 
 export type BookingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "hotelId" | "createdAt" | "updatedAt" | "bookingAmmount" | "status" | "totalGuests", ExtArgs["result"]["booking"]>
+export type BookingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  idempotencyKey?: boolean | Prisma.Booking$idempotencyKeyArgs<ExtArgs>
+}
 
 export type $BookingPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Booking"
-  objects: {}
+  objects: {
+    idempotencyKey: Prisma.$idempotencyKeyPayload<ExtArgs> | null
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     userId: number
@@ -832,6 +924,7 @@ readonly fields: BookingFieldRefs;
  */
 export interface Prisma__BookingClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  idempotencyKey<T extends Prisma.Booking$idempotencyKeyArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Booking$idempotencyKeyArgs<ExtArgs>>): Prisma.Prisma__idempotencyKeyClient<runtime.Types.Result.GetResult<Prisma.$idempotencyKeyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -886,6 +979,10 @@ export type BookingFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Inter
    */
   omit?: Prisma.BookingOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BookingInclude<ExtArgs> | null
+  /**
    * Filter, which Booking to fetch.
    */
   where: Prisma.BookingWhereUniqueInput
@@ -904,6 +1001,10 @@ export type BookingFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extension
    */
   omit?: Prisma.BookingOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BookingInclude<ExtArgs> | null
+  /**
    * Filter, which Booking to fetch.
    */
   where: Prisma.BookingWhereUniqueInput
@@ -921,6 +1022,10 @@ export type BookingFindFirstArgs<ExtArgs extends runtime.Types.Extensions.Intern
    * Omit specific fields from the Booking
    */
   omit?: Prisma.BookingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BookingInclude<ExtArgs> | null
   /**
    * Filter, which Booking to fetch.
    */
@@ -970,6 +1075,10 @@ export type BookingFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensions
    */
   omit?: Prisma.BookingOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BookingInclude<ExtArgs> | null
+  /**
    * Filter, which Booking to fetch.
    */
   where?: Prisma.BookingWhereInput
@@ -1017,6 +1126,10 @@ export type BookingFindManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Omit specific fields from the Booking
    */
   omit?: Prisma.BookingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BookingInclude<ExtArgs> | null
   /**
    * Filter, which Bookings to fetch.
    */
@@ -1066,6 +1179,10 @@ export type BookingCreateArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    */
   omit?: Prisma.BookingOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BookingInclude<ExtArgs> | null
+  /**
    * The data needed to create a Booking.
    */
   data: Prisma.XOR<Prisma.BookingCreateInput, Prisma.BookingUncheckedCreateInput>
@@ -1094,6 +1211,10 @@ export type BookingUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    * Omit specific fields from the Booking
    */
   omit?: Prisma.BookingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BookingInclude<ExtArgs> | null
   /**
    * The data needed to update a Booking.
    */
@@ -1135,6 +1256,10 @@ export type BookingUpsertArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    */
   omit?: Prisma.BookingOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BookingInclude<ExtArgs> | null
+  /**
    * The filter to search for the Booking to update in case it exists.
    */
   where: Prisma.BookingWhereUniqueInput
@@ -1161,6 +1286,10 @@ export type BookingDeleteArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    */
   omit?: Prisma.BookingOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BookingInclude<ExtArgs> | null
+  /**
    * Filter which Booking to delete.
    */
   where: Prisma.BookingWhereUniqueInput
@@ -1181,6 +1310,25 @@ export type BookingDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
 }
 
 /**
+ * Booking.idempotencyKey
+ */
+export type Booking$idempotencyKeyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the idempotencyKey
+   */
+  select?: Prisma.idempotencyKeySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the idempotencyKey
+   */
+  omit?: Prisma.idempotencyKeyOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.idempotencyKeyInclude<ExtArgs> | null
+  where?: Prisma.idempotencyKeyWhereInput
+}
+
+/**
  * Booking without action
  */
 export type BookingDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1192,4 +1340,8 @@ export type BookingDefaultArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Omit specific fields from the Booking
    */
   omit?: Prisma.BookingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BookingInclude<ExtArgs> | null
 }

@@ -9,4 +9,5 @@
  * 🟢 You can import this file directly.
  */
 export type * from './models/Booking.js'
+export type * from './models/idempotencyKey.js'
 export type * from './commonInputTypes.js'
