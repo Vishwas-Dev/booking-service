@@ -3,7 +3,7 @@ import bookingRouter from './booking.router.js';
 
 const v1Router = express.Router();
 
-v1Router.use('/', bookingRouter);
+v1Router.use('/bookings', bookingRouter);
 
 
 export default v1Router;
