@@ -27,6 +27,7 @@ export async function confirmBookingService(idempotencyKey: string) {
         throw new NotFoundError(" idempotency key not found");
     }
     if (idempotencyKeyData.finalized) {
+
         throw new BadRequestError("Booking already finalized");
     }
 

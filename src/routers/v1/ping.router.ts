@@ -19,6 +19,11 @@ pingRouter.get(
 //     validateRequestBody(userSchema),
 //     pingHandler
 //   );
+// pingRouter.get(
+//     "/",
+//     validateRequestBody(userSchema),
+//     pingHandler
+//   );
 
 
 pingRouter.get('/health', (req, res) => {
