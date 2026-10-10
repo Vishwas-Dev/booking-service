@@ -13,12 +13,7 @@ pingRouter.get(
     validateRequestBody(pingSchema),
     pingHandler
   );
-  
-// pingRouter.get(
-//     "/",
-//     validateRequestBody(userSchema),
-//     pingHandler
-//   );
+
 // pingRouter.get(
 //     "/",
 //     validateRequestBody(userSchema),
