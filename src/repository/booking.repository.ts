@@ -1,6 +1,9 @@
 
 import prisma from "../prisma/client.js";
 import { Prisma } from "../prisma/generated/client.js";
+import { validate as isValidUUID } from "uuid";
+import { BadRequestError, NotFoundError } from '../utilis/error/app.error.js';
+
 
 
 // for creating booking
@@ -26,16 +29,27 @@ export async function createIdempotencyKey(key: string, bookingId: number) {
     return idempotencyKey
 }
 
-//   for get the idem key
-export async function getIdempotencyKey(key: string) {
 
-    const idempotencyKey = await prisma.idempotencyKey.findUnique({
-        where: {
-            key 
-        }
-    });
-    return idempotencyKey;
+//   for get the idem key
+export async function getIdempotencyKeyWithLock(key: string, tx: Prisma.TransactionClient) {
+
+    if (!isValidUUID(key)) {
+        throw new BadRequestError("Invalid idemponetcy key format");
+    }
+
+    const idempotencyKey: Array<Prisma.idempotencyKeySelect> = await tx.$queryRaw`
+    SELECT * FROM "IdempotencyKey" WHERE "key" = ${key} FOR UPDATE `
+
+    console.log("idempotemcyKey not found", idempotencyKey);
+
+    if (!idempotencyKey || idempotencyKey.length == 0) {
+        throw new NotFoundError("idemponetcy key not found");
+    }
+    return idempotencyKey[0]
 }
+
+
+
 //   for get the booking id
 export async function getBookingById(bookingId: number) {
 
