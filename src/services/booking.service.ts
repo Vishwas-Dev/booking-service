@@ -25,7 +25,7 @@ export async function createBookingService(BookingDTO: bookingDTO) {
 
 export async function confirmBookingService(idempotencyKey: string) {
    return await prisma.$transaction( async (tx) => {
-     const idempotencyKeyData = await getIdempotencyKeyWithLock(idempotencyKey, tx);
+     const idempotencyKeyData = await getIdempotencyKeyWithLock(tx, idempotencyKey);
     if (!idempotencyKeyData) {
         throw new NotFoundError(" idempotency key not found");
     }
@@ -33,8 +33,8 @@ export async function confirmBookingService(idempotencyKey: string) {
         throw new BadRequestError("Booking already finalized");
     }
 
-    const booking = await confirmBooking(idempotencyKeyData.bookingId);
-    await finalizeIdempotencyKey(idempotencyKey)
+    const booking = await confirmBooking(tx, idempotencyKeyData.bookingId);
+    await finalizeIdempotencyKey(tx , idempotencyKey)
     return booking;
    }) 
     

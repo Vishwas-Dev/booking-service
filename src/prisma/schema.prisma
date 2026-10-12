@@ -5,32 +5,33 @@
 
 generator client {
   provider = "prisma-client"
-  output = "./generated"
+  output   = "./generated"
 }
+
 datasource db {
   provider = "mysql"
 }
 
 model Booking {
-  id        Int      @id @default(autoincrement())
-  userId    Int
-  hotelId   Int
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id             Int             @id @default(autoincrement())
+  userId         Int
+  hotelId        Int
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
   bookingAmmount Int
-  status     bookingStatus @default(PENDING)
-  totalGuests   Int
+  status         bookingStatus   @default(PENDING)
+  totalGuests    Int
   idempotencyKey idempotencyKey?
 }
 
 model idempotencyKey {
   id        Int      @id @default(autoincrement())
-  key       String   @unique //uuid
+  idemKey   String   @unique //uuid
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  finalized Boolean @default(false)
-  bookingId Int @unique
-  booking  Booking?  @relation(fields: [bookingId], references: [id])
+  finalized Boolean  @default(false)
+  bookingId Int      @unique
+  booking   Booking? @relation(fields: [bookingId], references: [id])
 }
 
 enum bookingStatus {
