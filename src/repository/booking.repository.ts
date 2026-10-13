@@ -36,12 +36,10 @@ export async function getIdempotencyKeyWithLock(tx: Prisma.TransactionClient, ke
     if (!isValidUUID(key)) {
         throw new BadRequestError("Invalid idemponetcy key format");
     }
-    const idempotencyKey: Array<Prisma.idempotencyKeyModel> = await tx.$queryRaw(Prisma.raw(`
-    SELECT * FROM "IdempotencyKey" WHERE "idemKey" = ${key} FOR UPDATE;`)
+    const idempotencyKey: Array<Prisma.idempotencyKeyModel> = await tx.$queryRaw(
+        Prisma.raw(`SELECT * FROM IdempotencyKey 
+            WHERE idemKey = '${key}' FOR UPDATE;`)
 )
-        console.log("this ", idempotencyKey);
-    console.log("idempotemcyKey not found", idempotencyKey);
-
     if (!idempotencyKey || idempotencyKey.length == 0) {
         throw new NotFoundError("idemponetcy key not found");
     }
