@@ -2,7 +2,7 @@ import { serverConfig } from "../config/index.js";
 import { redlock } from "../config/redis.config.js";
 import type { bookingDTO } from "../dto/booking.dto.js";
 import prisma from "../prisma/client.js";
-import { confirmBooking, createBooking, createIdempotencyKey, finalizeIdempotencyKey, getIdempotencyKeyWithLock } from "../repository/booking.repository.js";
+import { confirmBooking, createBooking, createIdempotencyKey, finalizeIdempotencyKey, getIdempotencyKeyWithLock } from "../repositories/booking.repository.js";
 import { BadRequestError, InternalServerError, NotFoundError } from "../utilis/error/app.error.js";
 import { generateIdempotencyKey } from "../utilis/helpers/generateIdempotencyKey.js";
 
